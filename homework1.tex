@@ -1,0 +1,47 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{作业一: 黎曼可积与勒贝格可积的定义叙述与区别分析}
+
+
+\author{邵柯欣 \\ 专业：信息与计算科学  学号：3200103310}
+
+\begin{document}
+
+\maketitle
+
+
+这是一个来自实变函数领域的问题:最早对积分运算进行定义的黎曼积分是对于非负值和足够光滑的函数来说，其积分相当于使用求极限的手段来计算一个多边形的面积。但是随着对更加不规则的函数的积分运算的需要不断产生（比如为了讨论数学分析中的极限过程，或者出于概率论的需求），很快就产生了对更加广义的求极限手段的要求来定义相应的积分运算，于是勒贝格积分应运而生。\par
+本文将通过两部分，分别阐述两种积分的定义和区别。
+
+\section{定义的叙述:}
+
+\subsection{黎曼可积的定义}
+
+若A为f(x)的黎曼积分$\Longleftrightarrow$对任意的$\varepsilon>0$,存在$\sigma>0$,对任意的分割满足$|x_i-x_{i-1}|<\sigma$，
+\begin{equation}
+|\sum_{i=0}^nf(t_i)(x_i-x_{i-1})-A|<\varepsilon \label{pythagorean}
+\end{equation}
+
+\subsection{勒贝格可积的定义}
+
+若B为f(x)的勒贝格积分$\longleftrightarrow$若f(x)是可测集E上的(L)可测函数，则当勒贝格积分
+\begin{equation}
+  B=(L)\int_Ef(x)dx<\infty \label{pythagorean}
+\end{equation}
+\newpage
+\section{两种积分区别的叙述}
+
+\subsection{}
+由两种积分的定义易知， Riemann 可积函数都是 Lebesgue 可积函数，所以 Lebesgue 积分可以看作是 Riemann 积分的拓展。
+
+\subsection{}
+Lebesgue 积分最重要的特点在于它极限的性质，这些性质使得 Lebesgue 可积函数列逐点收敛的极限一般也是 Lebesgue 可积的。所以很多 Lebesgue 可积函数相关的空间是完备的 (如$L^p$空间是完备的)。而作为比较，Riemann 可积函数列逐点收敛的极限很多情况下是 Riemann 不可积的；我们需要一致收敛的条件才能保证 Riemann 可积函数的极限可积。一致收敛比起逐点收敛强很多。
+
+\subsection{}
+Lebesgue 积分是基于测度来定义的，所以它能够被定义在更广义的空间上 (如概率空间）。而 Riemann 积分的定义需要一个"有序"的结构 (如区间、区间上的分割等），这个使得它的实用性小很多，主要就是限制在了$R^n$空间上。
+
+\end{document}
