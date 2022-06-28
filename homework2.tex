@@ -1,0 +1,143 @@
+\documentclass{ctexart}
+\usepackage{xltxtra}
+
+\title{作业二：shell编程的返回值实现}
+
+\author{邵柯欣\\专业：信息与计算科学 学号：3200103310}
+
+\begin{document}
+
+\maketitle
+\pagestyle{empty}
+
+\section{代码(分为两个部分)}
+来源：Beginning+Linux+Programming的第48页
+\subsection{第一部分：子函数}
+~\\
+\\创建\verb|yes_or_no|函数，用来根据用户的反馈确定返回值。
+\begin{verbatim}
+#!/bin/bash
+
+yes_or_no(){
+  echo "Is your name $* ?"     %打印带有用户输入行参的语句
+  while true
+  do
+    echo -n "Enter yes or no:" %第一次提示用户选择
+    read x                     %存储用户的输入
+    case "$x" in               %根据用户的反馈选择输出
+      y | yes ) return 0;;
+      n | no )  return 0;;
+      * )       echo "Answer yes or no"
+      esac
+    done
+}
+\end{verbatim}
+
+\subsection{第二部分：main函数}
+\begin{verbatim}
+echo "Original parameter are $*"
+
+if yes_or_no "$1"
+then
+  echo "Hi $1, nice name"
+else
+  echo "Never mind"
+fi
+exit 0
+\end{verbatim}
+~\\
+~\\
+
+\section{对文件权限的修改}
+~\\  
+\\创建一个\verb|My_name|文件，将上面两段代码写到该文件中。
+~\\  
+\\但是，如果你直接用
+\\\verb|./My_name|
+\\命令去尝试运行这个文件，你会得到
+\\\verb|bash: ./My_name: 权限不足|
+\\的错误反馈。
+\\这段程序并没有像我们所期待的那样运行起来。
+~\\  
+\\为了解决这个问题，我们输入
+\\\verb|ls -l|
+\\来查看我们对这个文件的权限，我们会发现，\verb|My_name|的权限状态为
+\\\verb|rw-rw-r--|
+\\表明我们没有运行的权限。
+~\\  
+\\于是，我们输入
+\\\verb|chmod 777 ~/My_name|
+\\来更改权限状态。
+~\\  
+\\再次输入
+~\\\verb|ls -l|
+\\我们可以看到\verb|My_name|的权限状态为
+\\\verb|rwxrwxrwx|。
+~\\  
+\\接下来，我们就可以通过
+\\\verb|./My_name|
+\\命令去尝试运行这个文件了。
+~\\
+~\\
+
+\section{尝试不同的输入}
+~\\
+\\通过观察程序我们可以看到，程序中出现了\verb|$* $1|两个变量。
+\\根据课本前面的介绍，我们知道\verb|$*|表示\verb|./My_name|的所有形参，\verb|$1|表示\verb|./My_name|的第一个行参。
+~\\
+\\同理可知，\verb|$i|表示\verb|./My_name|的第\verb|i|个行参\verb|(i>0)|。
+\\特别注意的是，当\verb|i=0|时，\verb|$i|表示\verb|./My_name|自身的名字，即\verb|./My_name|。\par
+~\\
+\subsection{输入输出样例一}
+~\\
+\\如果我们运行
+\\\verb|./My_name Rick Neil|
+\\此时我们输入了两个行参，所以\verb|$*|上的值为，运行结果如样例一所示。
+\begin{verbatim}
+$ ./My_name
+Original parameter are
+Is your name ?
+\end{verbatim}
+~\\
+
+\subsection{输入输出样例二}
+~\\
+\\如果我们直接运行
+\\\verb|./My_name Rick Neil|
+\\此时我们输入了两个行参，所以\verb|$*|的值是\verb|Rick Neil|，\verb|$1|的值是\verb|Rick|运行结果如样例二所示。
+\begin{verbatim}
+$ ./My_name Rick Neil
+Original parameter are Rick Neil
+Is your name Rick ?
+\end{verbatim}
+~\\
+
+\subsection{输入输出样例三}
+~\\
+\\如果我们直接运行
+\\\verb|./My_name Rick|
+\\此时我们只输入一个行参，所以\verb|$*|和\verb|$1|的值相同都为\verb|Rick|，运行结果如样例三所示。
+\begin{verbatim}
+$ ./My_name Rick
+Original parameter are Rick
+Is your name Rick ?
+\end{verbatim}
+~\\
+~\\
+
+\section{总结}
+~\\
+\\通过该\verb|shell|程序样例，我掌握了以下知识点：
+~\\
+\begin{itemize}
+\item 掌握了如何用\verb|shell|编程实现输入和输出返回值；
+\item 了解了\verb|$*,$i(i>=0)|变量的含义;
+\item 能熟练运用\verb|chown,chmod|函数更改\verb|shell|程序文件的所有者和权限。
+\item ...
+\end{itemize}
+
+
+
+\bibliographystyle{plain}
+\bibliography{ZL.bib}
+\end{document}
