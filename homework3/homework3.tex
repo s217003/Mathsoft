@@ -1,0 +1,86 @@
+\documentclass{ctexart}
+
+\usepackage{xltxtra}
+\usepackage{pifont}
+
+
+
+\title{作业三：对自己Linux工作环境的介绍}
+\author{邵柯欣\\专业：信息与计算科学 学号：3200103310}
+
+\begin{document}
+\maketitle
+~\\
+
+\section{我的Linux发行版名称以及版本号}
+
+\begin{itemize}
+\item 发行版名称:Ubuntu
+\item 版本号:Ubuntu 20.04.4 LTS
+\end{itemize}
+~\\
+
+
+\section{我对系统做了哪些主要的调整，安装了哪些软件，做了哪些额外的配置工作}
+
+\begin{itemize}
+\item 通过变更\verb|/ect/apt/sources.list$|文件(当然，有保存原文件为\verb|/ect/apt/sources.list.old$|){\bf 更改了下载源}为阿里。
+\item 用命令，安装$synaptic$用来安装软件。在synaptic中,下载$fcitx,fcitx-googlepinyin$
+\item 在Language Support中选择fcitx，并{\bf 设置语言和键盘}。
+  \newpage
+\item 打开synaptic,{\bf 安装扩展包}：
+\\$g++,gcc,$
+\\$make,cmake,aotumake,$
+\\$emacs,emacs-goodies-el$
+\\$gedit,$
+\\$texlive-full,$
+\\$doxygen,doxygen-doc,$
+\\$libboos-all-dev,$
+\\$trllinos-all-dev,trllinos-dbg,trllinos-doc,$
+\\$dx,$
+\\$git,ssh,vnc4server,x11vnc,$
+\\$virtualbox$
+\item 在网上下载$doxymacs$安装包。
+\item {\bf 配置工作}：
+\\\ding{172}在\verb|.emacs|文件中配置doxymacs和emacs的其他参数
+\\\ding{173}在\verb|.bashrc|文件中配置添加\verb|alias emacs='LC_CTYPE=zh_CN.utf8 emacs'|
+\item 从网上安装钉钉、QQ、坚果云。
+\end{itemize}
+~\\
+
+
+\section{规划我的下一步工作}
+
+\subsection{预计未来半年我将在什么场合下使用Linux环境}
+
+\begin{itemize}
+\item 上课编程敲代码;
+\item 写实验报告、论文;
+\item 做课程笔记;
+\item 也许打游戏（看不见我看不见我）;
+\item 。。。
+\end{itemize}
+
+\subsection{分析我目前的工作环境是否符合未来需求，如果不是，计划作出什么样的改变}
+
+{\bf 我感觉我目前的工作环境已经可以满足我未来的需要了}\cite{PMSAJoP2018}。此处(随便)插入一个文献引用\verb|(>_<)|。
+
+\begin{itemize}
+\item 我对目前工作环境中的文件目录、编译器页面、指令快捷键等都比较熟悉，可以相对愉快的完成老师布置的任务和自己需要文件的编写。
+\item 它稳定不崩盘（只要我不做死去探索新世界）。
+\end{itemize}
+~\\
+
+
+\section{我将如何保证我的工作系统中的代码、文献和工作结果的稳定和安全}
+\begin{itemize}
+\item {\bf 关于代码}：我在{\bf gitee和github}上都有帐号，平时的代码都会及时上传。
+\item {\bf 关于文献资料}：我使用{\bf 坚果云和百度网盘}（其他更加优秀可以存放大型文件的网盘还在寻找）来保存，小型的文件会放到坚果云里，大型的（一般不考虑重新下回来）会扔到百度网盘（下载速度感人）里。
+\end{itemize}
+
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{ZL.bib}
+
+\end{document}
