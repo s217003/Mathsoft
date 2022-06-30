@@ -1,0 +1,90 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{作业三：Mandelbrot Set 的生成和探索}
+
+\author{邵柯欣 \\ 专业：信息与计算科学 学号：3200103310}
+
+\begin{document}
+\maketitle
+
+\section{摘要}
+
+若一个复系数的二次多项式$z_{n+1}=z_n^2+c$，在给定$z_0=0$的前提下，开始递归计算，存在复数$c$，使得该方程无限次迭代后的结果能保持有界（即不发散），将满足上述条件的复数${c}$的集合视为一种特殊集。$Adrien Douady$为纪念数学家$Benoit Mandelbrot$而将该特殊集命名为$Mandelbrot set$。
+
+$Mandelbrot set$图像可以通过选取不同的复数$c$，并判断其数列${z_n}$是否达到无穷大（实践中通常指其是否在预设迭代次数后离开预设的某个含0在内的有界邻域）来实现：将$c$的实部作为二维平面的横坐标，虚部作为二维平面纵坐标，然后根据数列${z_n}$是否超过主观设定阈值来给每个点染色，若$ c $在经过预设迭代次数之后没有超过阈值（注意：这里是将曼德布洛特集图像与其补集图像区分开来的标志）则染成特殊的颜色（通常是黑色）。
+
+因为$Mandelbrot set$图像在美学上拥有独特的吸引力，并且还是一个根据简单规则产生复杂结构的代表例子，这使得曼德布洛特集在数学之外的其他领域中也十分流行。它也是数学可视化和表现数学之美的最著名例子之一。 
+
+\section{引言}
+$Mandelbrot set$起源于20世纪初由法国数学家$Pierre Fatou$和$Gaston Julia$首先研究的复杂动力学。首次确切定义分形，并绘制出可视化的分形图案得益于$Robert W. Brooks$和$Peter Matelski$在1978年对$Kleinian Groups$的部分研究工作。在此基础上，1980年3月1日，在位于纽约的$Yorktown Heights$的$IBM$的$Thomas J. Watson Research Center$，$Benoît B. Mandelbrot$首次绘制出曼德布洛特集的可视化图形。且$Benoît B. Mandelbrot$在1980年发表了一篇关于二次多项式的参数空间$Parameter Space$的研究论文。对曼德布洛特集的数学研究真正始于数学家$Adrien Douady$和$John H. Hubbard$的一系列研究工作。他们探明了曼德布洛特集的许多基本性质，$Adrien Douady$ 为纪念$Benoît B. Mandelbrot$在分形几何中做出的杰出贡献，将该集合命名为$Mandelbrot set$。 \footnote{https://wiki.swarma.org/index.php/%E6%9B%BC%E5%BE%B7%E5%B8%83%E6%B4%9B%E7%89%B9%E9%9B%86_Mandelbrot_set}
+\section{问题的背景介绍}
+因为$Mandelbrot set$图像在美学上拥有独特的吸引力，并且还是一个根据简单规则产生复杂结构的代表例子，这使得曼德布洛特集在数学之外的其他领域中也十分流行。它也是数学可视化和表现数学之美的最著名例子之一。
+随着个人计算机的普及,绘制$Mandelbrot set$图像变得十分方便快捷。
+理论上$Mandelbrot set$图像可以无限放大，但实际操作时,由于$double$类型精度的影响,放大到一定程度会造成失真。本文中，将对$Mandelbrot set$图像进行缩放展示，探究不同部位$Mandelbrot set$图像的不同。
+\section{数学理论}
+
+$Mandelbrot set$指复数集${c}$,对任意的$c\in C$,给定$z_0=0$,满足经过方程$z_{n+1}=z_n^2+c$保持有界（即不发散）。
+
+存在定理：复数趋向于无穷大，当且仅当它在某一点上具有模量>2。（仅适用于$z_{n+1}=z_n^2+c$）
+
+所以,在用$C++$绘制$Mandelbrot set$图像时,我们只需要验证在给定的迭代次数里,$z_n$的模长是否大于2,就可以判断该二维平面的点所表示的复数$c$是否属于$Mandelbrot set$。
+
+\section{算法}
+
+\begin{verbatim}
+dim z_0=0;
+dim N=给定值;
+给定a,b,d;
+dim image=[a-d,a+d]*[b-d,b+d];
+for p=(x,y) in image:
+  the color of p = white;
+  c=x+y*i;
+  dim n=0;
+  while n<N and |z_n|<=2:
+    z_{n+1}=z_n^2+c;
+    n=n+1;
+  loop;
+  if n=N:
+    the color of p = black;
+  endif
+endfor
+\end{verbatim}
+
+\section{数值算例}
+\section{结论}
+\end{document}
+
+1.摘要字数
+在写论文摘要的时候，字数不需要太多，大家要把握一个原则：精简，能一句话讲完的事，大家不要用2句或3句来讲述，这样不仅占字数，还会显得你很啰嗦。
+另外，如果是中文摘要的话，一般300个字以内就够了，英文摘要的话，则在250个实词以内即可。还需要注意的是，摘要中，不能出现图、表、化学结构式等东西哦~
+
+2.摘要四部分
+
+摘要主要有四部分，分别是研究背景/研究目的、研究内容/研究对象、研究方法、以及研究结果。其中，每一部分都很重要，大家要慎重对待每一部分。
+二、如何写论文摘要
+
+看完上面的内容，相信大家对摘要都有了一定的了解，那么论文摘要具体要怎么写呢？别急，下面就来分享两种较为实用的写法。
+
+1.万金油法
+
+万金油法，这种方法也被叫做捋大纲法，就是按照论文的大纲/目录，将论文主要研究的内容进行梳理、概括。基本什么类型或专业的论文都适用。基本句型：本文对XX进行了分析，采取了XX的研究方法，最终得到的XX结果。
+
+2.提问法
+
+提问法，简单来讲，就是主要回答四个问题，并将这四个问题的答案，进行汇总串联，最终形成一篇完整的论文摘要。
+
+其中，主要回答这四个问题：
+
+①本篇论文主要解决什么问题？
+
+②本篇论文主要采用了什么研究方法？
+
+③解决问题后得到什么结果？
+
+④所得到的结果对实际有什么影响？
+
+根据论文内容，回答上面这四个问题，再完成汇总即可。
