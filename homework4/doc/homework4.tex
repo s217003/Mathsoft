@@ -1,0 +1,77 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{作业三：Mandelbrot Set 的生成和探索}
+
+\author{邵柯欣 \\ 专业：信息与计算科学 学号：3200103310}
+
+\begin{document}
+\maketitle
+
+\section{摘要}
+
+让一个复系数的二次多项式$z_{n+1}=z_n^2+c$,经过无穷次迭代依旧可以保持收敛的复数${c}$集合称为$Mandelbrot set$。本文将通过$C++$编程绘制,$Mandelbrot set$二维平面(x轴代表实部,y轴代表虚部)表示的图像(称为$Mandelbrot set$图像),并对该图像不同的位置进行缩放对比,切实感受$Mandelbrot set$图像的魅力。
+
+\section{引言}
+
+因为$Mandelbrot set$图像在美学上拥有独特的吸引力，并且还是一个根据简单规则产生复杂结构的代表例子，这使得曼德布洛特集在数学之外的其他领域中也十分流行。它也是数学可视化和表现数学之美的最著名例子之一。随着个人计算机的普及,绘制$Mandelbrot set$图像变得十分方便快捷。理论上$Mandelbrot set$图像可以无限放大，但实际操作时,由于$double$类型精度的影响,放大到一定程度会造成失真。本文中，将对$Mandelbrot set$图像进行缩放展示，探究不同部位$Mandelbrot set$图像的不同。
+
+\section{问题的背景介绍}
+
+$Mandelbrot set$起源于20世纪初由法国数学家$Pierre Fatou$和$Gaston Julia$首先研究的复杂动力学。首次确切定义分形，并绘制出可视化的分形图案得益于$Robert W. Brooks$和$Peter Matelski$在1978年对$Kleinian Groups$的部分研究工作。在此基础上，1980年3月1日，在位于纽约的$Yorktown Heights$的$IBM$的$Thomas J. Watson Research Center$，$Benoît B. Mandelbrot$首次绘制出曼德布洛特集的可视化图形。且$Benoît B. Mandelbrot$在1980年发表了一篇关于二次多项式的参数空间$Parameter Space$的研究论文。对曼德布洛特集的数学研究真正始于数学家$Adrien Douady$和$John H. Hubbard$的一系列研究工作。他们探明了曼德布洛特集的许多基本性质，$Adrien Douady$ 为纪念$Benoît B. Mandelbrot$在分形几何中做出的杰出贡献，将该集合命名为$Mandelbrot set$。
+
+\section{数学理论}
+
+$Mandelbrot set$指复数集${c}$,对任意的$c\in C$,给定$z_0=0$,满足经过方程$z_{n+1}=z_n^2+c$保持有界（即不发散）。\par
+
+存在定理：复数趋向于无穷大，当且仅当它在某一点上具有模量>2。（仅适用于$z_{n+1}=z_n^2+c$）\par
+
+所以,在用$C++$绘制$Mandelbrot set$图像时,我们只需要验证在给定的迭代次数里,$z_n$的模长是否大于2,就可以判断该二维平面的点所表示的复数$c$是否属于$Mandelbrot set$。\par
+
+\section{算法}
+
+$Mandelbrot set$图像可以通过在屏幕上选取不同点$p(x,y)$(代表复数$c$)，并判断其所对应的数列${z_n}$是否在预设迭代次数内模长超过2,若未超过则对其进行染色(通常是黑色)来得到。
+
+\begin{verbatim}
+dim z_0=0;
+dim N=给定值;
+给定ox,oy,d;
+dim image=[ox-d,ox+d]*[oy-d,oy+d];
+for p=(x,y) in image:
+  the color of p = white;
+  c=x+y*i;
+  dim n=0;
+  while n<N and |z_n|<=2:
+    z_{n+1}=z_n^2+c;
+    n=n+1;
+  loop;
+  if n=N:
+    the color of p = black;
+  endif
+endfor
+\end{verbatim}
+
+\section{数值算例}
+\subsection{算例一：图片参数$ox=0.0,oy=0.0,d=2.5$}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../example/f1.bmp}
+  \caption{整体的$Mandelbrot set$图像}
+  \label{g::01}
+\end{figure}
+
+\subsection{算例一：图片参数$ox=+-1.0,oy=+-1.0,d=2.5$}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../example/f2.bmp}
+  \caption{$Mandelbrot set$的局部放大}
+  \label{g::02}
+\end{figure}
+
+\section{结论}
+\end{document}
