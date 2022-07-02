@@ -1,0 +1,25 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{作业五：一个简短的介绍关于$roots$}
+
+\author{邵柯欣 \\ 专业：信息与计算科学 学号：3200103310}
+
+\begin{document}
+
+\maketitle
+
+\section{$roots$的作用和原理}
+
+作用介绍：利用函数及其导数逼近$f(x)$的根。\par
+
+原理介绍：初始猜想一个根$x_0$，从根的位置开始，在每次迭代时，在该位置绘制一条与函数$f(x)$相切的线，该线与x轴的交点成为新的猜想根。
+\\迭代过程为：
+\begin{equation}
+  x_{n+1} = x_n-f(x_n)/f(x_n)',
+\end{equation}
+$x_n$随着n的增大，会逐渐逼近$f(x)$的根。
+\end{document}

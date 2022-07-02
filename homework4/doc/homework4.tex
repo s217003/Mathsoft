@@ -3,8 +3,9 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{subfigure}
 
-\title{作业三：Mandelbrot Set 的生成和探索}
+\title{作业四：Mandelbrot Set 的生成和探索}
 
 \author{邵柯欣 \\ 专业：信息与计算科学 学号：3200103310}
 
@@ -21,13 +22,13 @@
 
 \section{问题的背景介绍}
 
-$Mandelbrot set$起源于20世纪初由法国数学家$Pierre Fatou$和$Gaston Julia$首先研究的复杂动力学。首次确切定义分形，并绘制出可视化的分形图案得益于$Robert W. Brooks$和$Peter Matelski$在1978年对$Kleinian Groups$的部分研究工作。在此基础上，1980年3月1日，在位于纽约的$Yorktown Heights$的$IBM$的$Thomas J. Watson Research Center$，$Benoît B. Mandelbrot$首次绘制出曼德布洛特集的可视化图形。且$Benoît B. Mandelbrot$在1980年发表了一篇关于二次多项式的参数空间$Parameter Space$的研究论文。对曼德布洛特集的数学研究真正始于数学家$Adrien Douady$和$John H. Hubbard$的一系列研究工作。他们探明了曼德布洛特集的许多基本性质，$Adrien Douady$ 为纪念$Benoît B. Mandelbrot$在分形几何中做出的杰出贡献，将该集合命名为$Mandelbrot set$。
+$Mandelbrot set$起源于20世纪初由法国数学家$Pierre Fatou$和$Gaston Julia$首先研究的复杂动力学。首次确切定义分形，并绘制出可视化的分形图案得益于$Robert W. Brooks$和$Peter Matelski$在1978年对$Kleinian Groups$的部分研究工作。在此基础上，1980年3月1日，在位于纽约的$Yorktown Heights$的$IBM$的$Thomas J. Watson Research Center$，$Benoît B. Mandelbrot$首次绘制出曼德布洛特集的可视化图形。且$Benoît B. Mandelbrot$在1980年发表了一篇关于二次多项式的参数空间$Parameter Space$的研究论文。对曼德布洛特集的数学研究真正始于数学家$Adrien Douady$和$John H. Hubbard$的一系列研究工作。他们探明了曼德布洛特集的许多基本性质，$Adrien Douady$ 为纪念$Benoît B. Mandelbrot$在分形几何中做出的杰出贡献，将该集合命名为$Mandelbrot set$\cite{daahjhudp1985,}。\par
 
 \section{数学理论}
 
 $Mandelbrot set$指复数集${c}$,对任意的$c\in C$,给定$z_0=0$,满足经过方程$z_{n+1}=z_n^2+c$保持有界（即不发散）。\par
 
-存在定理：复数趋向于无穷大，当且仅当它在某一点上具有模量>2。（仅适用于$z_{n+1}=z_n^2+c$）\par
+存在定理：复数趋向于无穷大，当且仅当它在某一点上具有模量>2。（仅适用于$z_{n+1}=z_n^2+c$）\cite{acms2022,}\par
 
 所以,在用$C++$绘制$Mandelbrot set$图像时,我们只需要验证在给定的迭代次数里,$z_n$的模长是否大于2,就可以判断该二维平面的点所表示的复数$c$是否属于$Mandelbrot set$。\par
 
@@ -55,23 +56,86 @@ endfor
 \end{verbatim}
 
 \section{数值算例}
-\subsection{算例一：图片参数$ox=0.0,oy=0.0,d=2.5$}
+\subsection{算例一：展示完整的$Mandelbrot set$图像}
 
-\begin{figure}[h]
+设定生成\ref{g::01}的参数为$ox=0.0,oy=0.0,d=2.2$
+
+\begin{figure}[ht]
   \centering
   \includegraphics[width=0.8\textwidth]{../example/f1.bmp}
-  \caption{整体的$Mandelbrot set$图像}
+  \caption{N = 50时，$Mandelbrot set$整体图像}
   \label{g::01}
 \end{figure}
 
-\subsection{算例一：图片参数$ox=+-1.0,oy=+-1.0,d=2.5$}
+我们可以看到$Mandelbrot set$图像关于x轴对称，且在xoy平面存在边界。$Mandelbrot set$图像在x轴上的范围是$[-2,0.25]$。
 
-\begin{figure}[h]
-  \centering
-  \includegraphics[width=0.8\textwidth]{../example/f2.bmp}
-  \caption{$Mandelbrot set$的局部放大}
+\subsection{算例二：对$Mandelbrot set$图像局部放大}
+
+这一算例中我们对$Mandelbrot set$图像进行局部的放大，得到一组图片\ref{g::02}。其中，生成图片\ref{f::02}的参数为$ox=-1.5,oy=0.0,d=0.8$;生成图片\ref{f::03}的参数为$ox=0.6,oy=0.0,d=0.8$;生成图片\ref{f::04}的参数为$ox=0.0,oy=0.8,d=0.8$;生成图片\ref{f::05}的参数为$ox=0.0,oy=-0.8,d=0.8$。
+
+\begin{figure}[ht]
+  \subfigure[$Mandelbrot set$的左部放大]{
+    \label{f::02}
+    \includegraphics[width=0.5\textwidth]{../example/f2.bmp}
+  }
+  \hspace{0.5in}
+  \subfigure[$Mandelbrot set$的右部放大]{  
+    \label{f::03}
+    \includegraphics[width=0.5\textwidth]{../example/f3.bmp}
+  }  
+  \hspace{0in}
+  \subfigure[$Mandelbrot set$的上部放大]{  
+    \label{f::04}
+    \includegraphics[width=0.5\textwidth]{../example/f4.bmp}
+  }
+  \hspace{0.5in}
+  \subfigure[$Mandelbrot set$的下部放大]{  
+    \label{f::05}
+    \includegraphics[width=0.5\textwidth]{../example/f5.bmp}
+  }
   \label{g::02}
+  \caption{N = 50时，$Mandelbrot set$的局部放大}
 \end{figure}
 
+放大后我们发现，图像边缘夹缝处有大量粘连。这是由于迭代次数不够，导致需要迭代$n>100$次才能显示发散的点未能被识别出来。
+
+\subsection{算例三：在算例二的基础上对最大迭代次数N进行修改}
+
+为了解决算例二图像粘连的问题，我们尝试增加迭代次数。
+将程序中的最大迭代次数改为200，得到如下的一组图像\ref{g::03}。
+
+\begin{figure}[ht]
+  \subfigure[$Mandelbrot set$的左部放大]{
+    \label{f::06}
+    \includegraphics[width=0.5\textwidth]{../example/f6.bmp}
+  }
+  \hspace{0.5in}
+  \subfigure[$Mandelbrot set$的右部放大]{  
+    \label{f::07}
+    \includegraphics[width=0.5\textwidth]{../example/f7.bmp}
+  }  
+  \hspace{0in}
+  \subfigure[$Mandelbrot set$的上部放大]{  
+    \label{f::08}
+    \includegraphics[width=0.5\textwidth]{../example/f8.bmp}
+  }
+  \hspace{0.5in}
+  \subfigure[$Mandelbrot set$的下部放大]{  
+    \label{f::09}
+    \includegraphics[width=0.5\textwidth]{../example/f9.bmp}
+  }
+  \label{g::03}
+  \caption{N = 200时，$Mandelbrot set$的局部放大}
+\end{figure}
+
+我们可以发现，粘连现象有所改善，但如果继续放大，该问题又会逐渐凸显。理论上，$Mandelbrot set$图像可以无限放大，但由于计算机的计算能力以及其屏幕的像素分辨率有限，所以只能在一定程度上近似$Mandelbrot set$图像，而不能完全实现复刻。
+
 \section{结论}
+
+我们在实践过程中发现，随着不断的放大，$Mandelbrot set$图像边缘的结构越来越复杂，呈现一种繁复的美丽，这是分形几何的典型特征，且理想的$Mandelbrot set$图像可以无限放大，因此$Mandelbrot set$图像属于分形几何。\par
+由于算法原理和计算机硬件均无法实现理想的无穷状态，因此只能在一定范围内去近似$Mandelbrot set$图像。
+
+\newcommand{\url}{}
+\bibliographystyle{plain}
+\bibliography{../lib/ZL.bib}
 \end{document}

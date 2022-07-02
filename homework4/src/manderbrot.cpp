@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 	int height = win.get_height();
 	double ox = win.get_ox() - dim;
 	double oy = win.get_oy() - dim / width * height;
-	int N = 50;
+	int N = 200;
 
 	char *cache = new char[width * height * 3];
 
