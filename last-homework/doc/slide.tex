@@ -1,0 +1,266 @@
+\documentclass{beamer}
+
+\usepackage{ctex}
+\usepackage{fontspec,xunicode,xltxtra}
+\usepackage{gnuplot-lua-tikz}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+
+\begin{document}
+
+\title{大作业}
+\author{邵柯欣}
+\institute{学号：3200103310 专业：信息与计算科学}
+\date{\today}
+
+\begin{frame}
+  \frametitle{摘要}
+  本文将对一维非线性方程的求根方法进行简单的介绍，并选择其中的二分法和牛顿法进行对比分析
+\end{frame}
+
+\begin{frame}
+  \frametitle{算法}
+  一维方程$f(x)$的求根算法可以分为两类:$root bracketing$和$root polishing$。\par
+  $root polishing$方法的算法思想是：
+  \begin{itemize}
+  \item 首先，在x轴上选取一个$x_0$作为初值;
+  \item 通过f(x)在$x_0$处的导数，构造近似函数;
+  \item 试图找到初始猜测的高阶改进。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  $root bracketing$的算法：
+  \begin{itemize}
+  \item 首先，选择一个根所在的初始区间，确保该区间包含f(x)=0的点，且函数在区间两端的正负性不相同;
+  \item 然后，选择区间正中间点为根带入方程，同时，该点将区间分为两半，选择能够保持函数在区间两端正负性不同的子区间为下一个迭代区间;
+  \item 重复上一步骤，反复迭代;
+  \item 直到，区间长度小于精度要求或者迭代次数大于设定的最大迭代次数，跳出迭代。
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{二分法}
+  二分法是$root bracketing$的最简单方法。但这是gsl库提供的最慢的算法，具有线性收敛性。\par
+  在每次迭代中，将区间平分，并计算中点处的函数值。该值的符号用于确定间隔的哪一半不包含根。这一半被丢弃，以产生一个新的、更小的包含根的区间。此过程可以无限期地继续，直到区间足够小。
+在任何时候，根的当前估计值都被视为区间的中点。
+\end{frame}
+
+\begin{frame}
+  \frametitle{牛顿法}
+  牛顿法是标准的根抛光算法。该算法从根位置的初始猜测开始。在每次迭代中，一条与函数相切的线在该位置被绘制。这条线穿过x轴成为新的猜测。迭代由以下序列定义，
+  \begin{equation}
+    x_{n+1} = x_n-f(x_n)/f(x_n)',
+  \end{equation}
+  牛顿法对于单根二次收敛，对于多根线性收敛。
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{数值算例分析}
+  接下来，我们分别用二分法和牛顿法对一个实际的方程例子(\ref{eq::02})求根，在这个过程中更加清楚的了解两种算法的不同。
+  \begin{equation}
+    f(x)=x^2-5,\label{eq::02}
+  \end{equation}
+  方程(\ref{eq::02})的一个根为$x=\sqrt{5}=2.236068...$
+\end{frame}
+
+\begin{frame}
+\frametitle{两种方法运行的结果}
+\begin{figure}
+\subfigure[二分法]{
+  \begin{tikzpicture}[gnuplot,scale=0.4]
+  \tikzstyle{every node}=[font=\small,scale=0.4]
+%% generated with GNUPLOT 5.2p8 (Lua 5.3; terminal rev. Nov 2018, script rev. 108)
+%% Mon 04 Jul 2022 01:59:49 PM CST
+\path (0.000,0.000) rectangle (12.500,8.750);
+\gpcolor{color=gp lt color border}
+\gpsetlinetype{gp lt border}
+\gpsetdashtype{gp dt solid}
+\gpsetlinewidth{1.00}
+\draw[gp path] (1.504,0.985)--(1.684,0.985);
+\draw[gp path] (11.947,0.985)--(11.767,0.985);
+\node[gp node right] at (1.320,0.985) {$-1$};
+\draw[gp path] (1.504,1.962)--(1.684,1.962);
+\draw[gp path] (11.947,1.962)--(11.767,1.962);
+\node[gp node right] at (1.320,1.962) {$-0.5$};
+\draw[gp path] (1.504,2.939)--(1.684,2.939);
+\draw[gp path] (11.947,2.939)--(11.767,2.939);
+\node[gp node right] at (1.320,2.939) {$0$};
+\draw[gp path] (1.504,3.916)--(1.684,3.916);
+\draw[gp path] (11.947,3.916)--(11.767,3.916);
+\node[gp node right] at (1.320,3.916) {$0.5$};
+\draw[gp path] (1.504,4.894)--(1.684,4.894);
+\draw[gp path] (11.947,4.894)--(11.767,4.894);
+\node[gp node right] at (1.320,4.894) {$1$};
+\draw[gp path] (1.504,5.871)--(1.684,5.871);
+\draw[gp path] (11.947,5.871)--(11.767,5.871);
+\node[gp node right] at (1.320,5.871) {$1.5$};
+\draw[gp path] (1.504,6.848)--(1.684,6.848);
+\draw[gp path] (11.947,6.848)--(11.767,6.848);
+\node[gp node right] at (1.320,6.848) {$2$};
+\draw[gp path] (1.504,7.825)--(1.684,7.825);
+\draw[gp path] (11.947,7.825)--(11.767,7.825);
+\node[gp node right] at (1.320,7.825) {$2.5$};
+\draw[gp path] (1.504,0.985)--(1.504,1.165);
+\draw[gp path] (1.504,7.825)--(1.504,7.645);
+\node[gp node center] at (1.504,0.677) {$0$};
+\draw[gp path] (3.245,0.985)--(3.245,1.165);
+\draw[gp path] (3.245,7.825)--(3.245,7.645);
+\node[gp node center] at (3.245,0.677) {$2$};
+\draw[gp path] (4.985,0.985)--(4.985,1.165);
+\draw[gp path] (4.985,7.825)--(4.985,7.645);
+\node[gp node center] at (4.985,0.677) {$4$};
+\draw[gp path] (6.726,0.985)--(6.726,1.165);
+\draw[gp path] (6.726,7.825)--(6.726,7.645);
+\node[gp node center] at (6.726,0.677) {$6$};
+\draw[gp path] (8.466,0.985)--(8.466,1.165);
+\draw[gp path] (8.466,7.825)--(8.466,7.645);
+\node[gp node center] at (8.466,0.677) {$8$};
+\draw[gp path] (10.207,0.985)--(10.207,1.165);
+\draw[gp path] (10.207,7.825)--(10.207,7.645);
+\node[gp node center] at (10.207,0.677) {$10$};
+\draw[gp path] (11.947,0.985)--(11.947,1.165);
+\draw[gp path] (11.947,7.825)--(11.947,7.645);
+\node[gp node center] at (11.947,0.677) {$12$};
+\draw[gp path] (1.504,7.825)--(1.504,0.985)--(11.947,0.985)--(11.947,7.825)--cycle;
+\node[gp node center,rotate=-270] at (0.292,4.405) {值};
+\node[gp node center] at (6.725,0.215) {迭代次数};
+\node[gp node center] at (6.725,8.287) {使用二分法的迭代过程};
+\node[gp node right] at (10.479,7.491) {区间下界};
+\gpcolor{rgb color={0.580,0.000,0.827}}
+\draw[gp path] (10.663,7.491)--(11.579,7.491);
+\draw[gp path] (2.374,2.939)--(3.245,5.382)--(4.115,6.604)--(4.985,7.214)--(5.855,7.214)%
+  --(6.726,7.214)--(7.596,7.291)--(8.466,7.291)--(9.336,7.291)--(10.207,7.300)--(11.077,7.305)%
+  --(11.947,7.307);
+\gpcolor{color=gp lt color border}
+\node[gp node right] at (10.479,7.183) {区间上界};
+\gpcolor{rgb color={0.000,0.620,0.451}}
+\draw[gp path] (10.663,7.183)--(11.579,7.183);
+\draw[gp path] (2.374,7.825)--(3.245,7.825)--(4.115,7.825)--(4.985,7.825)--(5.855,7.520)%
+  --(6.726,7.367)--(7.596,7.367)--(8.466,7.329)--(9.336,7.310)--(10.207,7.310)--(11.077,7.310)%
+  --(11.947,7.310);
+\gpcolor{color=gp lt color border}
+\node[gp node right] at (10.479,6.875) {根};
+\gpcolor{rgb color={0.337,0.706,0.914}}
+\draw[gp path] (10.663,6.875)--(11.579,6.875);
+\draw[gp path] (2.374,5.382)--(3.245,6.604)--(4.115,7.214)--(4.985,7.520)--(5.855,7.367)%
+  --(6.726,7.291)--(7.596,7.329)--(8.466,7.310)--(9.336,7.300)--(10.207,7.305)--(11.077,7.307)%
+  --(11.947,7.309);
+\gpcolor{color=gp lt color border}
+\node[gp node right] at (10.479,6.567) {误差};
+\gpcolor{rgb color={0.902,0.624,0.000}}
+\draw[gp path] (10.663,6.567)--(11.579,6.567);
+\draw[gp path] (2.374,1.012)--(3.245,2.234)--(4.115,2.844)--(4.985,3.150)--(5.855,2.997)%
+  --(6.726,2.921)--(7.596,2.959)--(8.466,2.940)--(9.336,2.930)--(10.207,2.935)--(11.077,2.937)%
+  --(11.947,2.939);
+\gpcolor{color=gp lt color border}
+\draw[gp path] (1.504,7.825)--(1.504,0.985)--(11.947,0.985)--(11.947,7.825)--cycle;
+%% coordinates of the plot area
+\gpdefrectangularnode{gp plot 1}{\pgfpoint{1.504cm}{0.985cm}}{\pgfpoint{11.947cm}{7.825cm}}
+\label{f::02}
+\end{tikzpicture}}
+\hspace{0.5in}
+\subfigure[牛顿法]{
+\begin{tikzpicture}[gnuplot,scale=0.4]
+\tikzstyle{every node}=[font=\small,scale=0.4]
+%% generated with GNUPLOT 5.2p8 (Lua 5.3; terminal rev. Nov 2018, script rev. 108)
+%% Mon 04 Jul 2022 01:54:22 PM CST
+\path (0.000,0.000) rectangle (12.500,8.750);
+\gpcolor{color=gp lt color border}
+\gpsetlinetype{gp lt border}
+\gpsetdashtype{gp dt solid}
+\gpsetlinewidth{1.00}
+\draw[gp path] (1.136,0.985)--(1.316,0.985);
+\draw[gp path] (11.947,0.985)--(11.767,0.985);
+\node[gp node right] at (0.952,0.985) {$-2$};
+\draw[gp path] (1.136,2.353)--(1.316,2.353);
+\draw[gp path] (11.947,2.353)--(11.767,2.353);
+\node[gp node right] at (0.952,2.353) {$-1$};
+\draw[gp path] (1.136,3.721)--(1.316,3.721);
+\draw[gp path] (11.947,3.721)--(11.767,3.721);
+\node[gp node right] at (0.952,3.721) {$0$};
+\draw[gp path] (1.136,5.089)--(1.316,5.089);
+\draw[gp path] (11.947,5.089)--(11.767,5.089);
+\node[gp node right] at (0.952,5.089) {$1$};
+\draw[gp path] (1.136,6.457)--(1.316,6.457);
+\draw[gp path] (11.947,6.457)--(11.767,6.457);
+\node[gp node right] at (0.952,6.457) {$2$};
+\draw[gp path] (1.136,7.825)--(1.316,7.825);
+\draw[gp path] (11.947,7.825)--(11.767,7.825);
+\node[gp node right] at (0.952,7.825) {$3$};
+\draw[gp path] (1.136,0.985)--(1.136,1.165);
+\draw[gp path] (1.136,7.825)--(1.136,7.645);
+\node[gp node center] at (1.136,0.677) {$1$};
+\draw[gp path] (2.938,0.985)--(2.938,1.165);
+\draw[gp path] (2.938,7.825)--(2.938,7.645);
+\node[gp node center] at (2.938,0.677) {$1.5$};
+\draw[gp path] (4.740,0.985)--(4.740,1.165);
+\draw[gp path] (4.740,7.825)--(4.740,7.645);
+\node[gp node center] at (4.740,0.677) {$2$};
+\draw[gp path] (6.542,0.985)--(6.542,1.165);
+\draw[gp path] (6.542,7.825)--(6.542,7.645);
+\node[gp node center] at (6.542,0.677) {$2.5$};
+\draw[gp path] (8.343,0.985)--(8.343,1.165);
+\draw[gp path] (8.343,7.825)--(8.343,7.645);
+\node[gp node center] at (8.343,0.677) {$3$};
+\draw[gp path] (10.145,0.985)--(10.145,1.165);
+\draw[gp path] (10.145,7.825)--(10.145,7.645);
+\node[gp node center] at (10.145,0.677) {$3.5$};
+\draw[gp path] (11.947,0.985)--(11.947,1.165);
+\draw[gp path] (11.947,7.825)--(11.947,7.645);
+\node[gp node center] at (11.947,0.677) {$4$};
+\draw[gp path] (1.136,7.825)--(1.136,0.985)--(11.947,0.985)--(11.947,7.825)--cycle;
+\node[gp node center,rotate=-270] at (0.292,4.405) {值};
+\node[gp node center] at (6.541,0.215) {迭代次数};
+\node[gp node center] at (6.541,8.287) {使用牛顿法的迭代过程};
+\node[gp node right] at (10.479,7.491) {根};
+\gpcolor{rgb color={0.580,0.000,0.827}}
+\draw[gp path] (10.663,7.491)--(11.579,7.491);
+\draw[gp path] (1.136,7.825)--(4.740,6.913)--(8.343,6.783)--(11.947,6.780);
+\gpcolor{color=gp lt color border}
+\node[gp node right] at (10.479,7.183) {误差};
+\gpcolor{rgb color={0.000,0.620,0.451}}
+\draw[gp path] (10.663,7.183)--(11.579,7.183);
+\draw[gp path] (1.136,4.766)--(4.740,3.854)--(8.343,3.724)--(11.947,3.721);
+\gpcolor{color=gp lt color border}
+\node[gp node right] at (10.479,6.875) {误差（est）};
+\gpcolor{rgb color={0.337,0.706,0.914}}
+\draw[gp path] (10.663,6.875)--(11.579,6.875);
+\draw[gp path] (1.136,0.985)--(4.740,2.809)--(8.343,3.591)--(11.947,3.718);
+\gpcolor{color=gp lt color border}
+\draw[gp path] (1.136,7.825)--(1.136,0.985)--(11.947,0.985)--(11.947,7.825)--cycle;
+%% coordinates of the plot area
+\gpdefrectangularnode{gp plot 1}{\pgfpoint{1.136cm}{0.985cm}}{\pgfpoint{11.947cm}{7.825cm}}
+\end{tikzpicture}
+\label{f::03}
+}
+%% gnuplot variables
+\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}
+  \frametitle{分析}
+  图(\ref{f::02})所展示的是用二分法求解方程(\ref{eq::02})的迭代过程。\par
+最开始确定根所在的区间为$[0,2.5]$，开始的几次迭代误差下降较快，但后面的收敛速度变得缓慢，最终经过12次迭代得到一个精度满足要求的解。\par
+~\\
+图(\ref{f::03})所展示的是用牛顿法求解方程(\ref{eq::02})的迭代过程。\par
+我们可以发现，牛顿法仅迭代5次，结果就已经满足精度要求，收敛速度非常快，但是该方法对绝对误差的控制能力比较差。
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{结论}
+  牛顿法的收敛速度很快，但是对绝对精度的控制能力不够;
+二分法的收敛速度很慢，但是可以快速控制精度下降
+\end{frame}
+
+\end{document}
